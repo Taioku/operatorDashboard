@@ -445,7 +445,7 @@ const TASKS = [
     name: "Baro Ki'Teer (Void Trader) arrival/departure",
     category: "unique",
     location: "Relays",
-    resetRule: { type: "interval", intervalHours: 336, hourUTC: 0, minuteUTC: 0 },
+    resetRule: { type: "interval", intervalHours: 336, hourUTC: 9, minuteUTC: 0 },
     notes: "Arrives every 2 weeks on Friday at 9:00am Eastern Time, departs the following Sunday at 9:00am ET (48h visit). Unlike most resets, Baro observes North American Daylight Saving Time, so his UTC time shifts between 13:00 and 14:00 UTC.",
   },
   {
