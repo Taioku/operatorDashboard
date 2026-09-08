@@ -471,55 +471,7 @@ const TASKS = [
     location: "Open worlds",
     resetRule: { type: "interval", intervalHours: 2.5 },
     notes: "2.5 hour (2h30m) cycle regardless of location.",
-  },
-  {
-    id: "prime-resurgence",
-    name: "Prime Resurgence rotation",
-    category: "unique",
-    location: "Relay",
-    resetRule: { type: "interval", intervalHours: 672, hourUTC: 18, minuteUTC: 0 },
-    notes: "Monthly timer, exactly 28 days, changes at 18:00 UTC.",
-  },
-  {
-    id: "plains-day-night",
-    name: "Plains of Eidolon (Earth) day/night cycle",
-    category: "unique",
-    location: "Plains of Eidolon, Earth",
-    resetRule: { type: "interval", intervalHours: 2.5 },
-    notes: "Day lasts 100 minutes, Night lasts 50 minutes; full cycle 150 minutes (2h30m).",
-  },
-  {
-    id: "orb-vallis-warm-cold",
-    name: "Orb Vallis (Venus) warm/cold cycle",
-    category: "unique",
-    location: "Orb Vallis, Venus",
-    resetRule: { type: "interval", intervalHours: 0.4444 },
-    notes: "Warm lasts 6m40s, Cold lasts 20m; full cycle 26m40s (~0.444h).",
-  },
-  {
-    id: "cambion-drift-fass-vome",
-    name: "Cambion Drift (Deimos) Fass/Vome cycle",
-    category: "unique",
-    location: "Cambion Drift, Deimos",
-    resetRule: { type: "interval", intervalHours: 2.5 },
-    notes: "Fass dominant for 100 minutes, Vome dominant for 50 minutes; full cycle 150 minutes (2h30m).",
-  },
-  {
-    id: "duviri-mood-spirals",
-    name: "Duviri Mood Spirals (Joy → Anger → Envy → Sorrow → Fear)",
-    category: "unique",
-    location: "Duviri",
-    resetRule: { type: "interval", intervalHours: 2 },
-    notes: "Changes every 2 hours, cycling through all 5 moods in fixed order.",
-  },
-  {
-    id: "zariman-faction-invasion",
-    name: "Zariman invading faction (Kuva Grineer vs Juno Corpus)",
-    category: "unique",
-    location: "Zariman Ten Zero",
-    resetRule: { type: "interval", intervalHours: 2.5 },
-    notes: "Rerolls between the two factions every 150 minutes (2h30m).",
-  },
+  }
   
 ];
 
