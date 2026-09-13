@@ -73,6 +73,12 @@
     padding:0;
   }
 
+  ul.links li{
+    display:flex;
+    align-items:baseline;
+    gap: 0.6rem;
+  }
+
   ul.links li a{
     display:flex;
     align-items:baseline;
@@ -102,6 +108,10 @@
 
   .link-doc:hover{
     color: var(--orokin);
+  }
+
+  .link-companion{
+    flex-shrink: 0;
   }
 </style>
 </head>
@@ -141,7 +151,7 @@
     {
       category: "Tools & Utilities",
       items: [
-        { name: "Warframe", url: "https://warframe.com/" },
+        { name: "Warframe", url: "https://warframe.com/", companion: { name: "Twitch", url: "https://www.twitch.tv/warframe" } },
         { name: "Warframe Wiki", url: "https://wiki.warframe.com/" },
         { name: "Daily/Weekly Task Checklist", url: "https://warframetools.com/Task-Checklist/" },
         { name: "warframechecklist/", url: "warframechecklist/" },
@@ -209,6 +219,15 @@
 
         a.innerHTML = `<span>${item.name}</span>${docHtml}`;
         li.appendChild(a);
+
+        if (item.companion) {
+          const companion = document.createElement("a");
+          companion.className = "link-doc link-companion";
+          companion.href = item.companion.url;
+          companion.textContent = item.companion.name;
+          li.appendChild(companion);
+        }
+
         list.appendChild(li);
       });
 
