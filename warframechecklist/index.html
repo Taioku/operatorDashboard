@@ -376,7 +376,6 @@
                 const infoButton = taskItem.querySelector('.task-info');
                 const infoText = info || 'No additional information available.';
                 infoButton.dataset.info = infoText;
-                infoButton.title = infoText;
 
                 taskItem.onclick = (event) => {
                     if (event.target.closest('.delete-btn, .eye-btn')) return;
@@ -465,6 +464,7 @@
                             category: section,
                             hidden: taskItem.classList.contains('hidden'),
                             location: taskItem.dataset.location || '',
+                            info: taskItem.querySelector('.task-info')?.dataset.info || '',
                             lastKnownResetBoundary: taskItem.dataset.lastKnownResetBoundary || null
                         });
                     });
@@ -482,14 +482,14 @@
                         if (container) container.innerHTML = '';
                     });
 
-                    savedTasks.forEach(({ text, completed, category, hidden, lastKnownResetBoundary, location }) => {
+                    savedTasks.forEach(({ text, completed, category, hidden, lastKnownResetBoundary, location, info }) => {
                         const targetCategory = category || 'other';
                         const container = document.getElementById(`${targetCategory}Tasks`);
                         if (!container) return;
                         const defaultTask = DEFAULT_TASK_LOOKUP.get(text);
                         const fallbackTask = DEFAULT_TASK_BY_CLEAN_TEXT.get(cleanTaskText(text));
                         const resolvedLocation = location || defaultTask?.location || fallbackTask?.location || '';
-                        const resolvedInfo = defaultTask?.notes || fallbackTask?.notes || '';
+                        const resolvedInfo = defaultTask?.notes || fallbackTask?.notes || info || '';
                         const taskElement = TaskElement.create(text, targetCategory, resolvedLocation, resolvedInfo);
                         taskElement.dataset.originalText = text;
                         taskElement.dataset.lastKnownResetBoundary = lastKnownResetBoundary || '';
