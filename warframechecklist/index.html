@@ -60,9 +60,9 @@
         .task-info{ position:relative; flex-shrink:0; margin-top:0.05rem; background:transparent; color:var(--ink-dim); cursor:help; font-size:0.7rem; font-weight:400; line-height:1; text-align:center; padding:0; border:0; }
         .task-info:hover,
         .task-info:focus-visible{ color:var(--orokin); outline:none; }
-        .task-info::after{ content:attr(data-info); position:absolute; left:calc(100% + 0.5rem); top:50%; z-index:10; display:none; width:min(260px, 70vw); padding:0.5rem 0.65rem; border:1px solid var(--line); background:var(--void); color:var(--ink); font-size:0.78rem; font-weight:400; line-height:1.4; text-align:left; white-space:normal; pointer-events:none; }
-        .task-info:hover::after,
-        .task-info:focus-visible::after{ display:block; }
+        .task-info-tooltip{ position:absolute; left:calc(100% + 0.5rem); top:50%; z-index:10; display:none; width:min(260px, 70vw); padding:0.5rem 0.65rem; border:1px solid var(--line); background:var(--void); color:var(--ink); font-size:0.78rem; font-weight:400; line-height:1.4; text-align:left; white-space:normal; pointer-events:none; }
+        .task-info:hover .task-info-tooltip,
+        .task-info:focus-visible .task-info-tooltip{ display:block; }
         .checkbox{ width:14px; height:14px; border:1px solid var(--orokin-dim); flex-shrink:0; margin-top:0.28rem; position:relative; }
         .checkbox.checked{ border-color:var(--orokin); }
         .checkbox.checked::after{ content:''; position:absolute; inset:2px; background:var(--orokin); }
@@ -355,7 +355,9 @@
                     <div class="task-main">
                         <div class="checkbox"></div>
                         <div class="task-text">${cleanText}</div>
-                        <button class="task-info" type="button" aria-label="Show additional information">?</button>
+                        <button class="task-info" type="button" aria-label="Show additional information">?
+                            <span class="task-info-tooltip"></span>
+                        </button>
                     </div>
                     ${location ? `
                         <div class="task-location">
@@ -380,7 +382,7 @@
 
                 const infoButton = taskItem.querySelector('.task-info');
                 const infoText = info || 'No additional information available.';
-                infoButton.dataset.info = infoText;
+                infoButton.querySelector('.task-info-tooltip').textContent = infoText;
 
                 taskItem.onclick = (event) => {
                     if (event.target.closest('.delete-btn, .eye-btn')) return;
