@@ -224,6 +224,11 @@
         const DEFAULT_TASK_BY_CLEAN_TEXT = new Map(TASKS.map((task) => [cleanTaskText(taskToText(task)), task]));
         const COLLAPSED_SECTION_STORAGE_KEY = 'warframeChecklistCollapsedSections';
 
+        function getTaskInfo(rawText, savedInfo = '') {
+            const task = DEFAULT_TASK_LOOKUP.get(rawText) || DEFAULT_TASK_BY_CLEAN_TEXT.get(cleanTaskText(rawText));
+            return task?.notes || savedInfo || '';
+        }
+
         class TimerUtils {
             static parseTimerFromText(text) {
                 const weeklyOrDaily = /<(?:(mon|tue|wed|thu|fri|sat|sun)-)?(\d{1,2}):(\d{2})-utc>/i;
@@ -489,7 +494,7 @@
                         const defaultTask = DEFAULT_TASK_LOOKUP.get(text);
                         const fallbackTask = DEFAULT_TASK_BY_CLEAN_TEXT.get(cleanTaskText(text));
                         const resolvedLocation = location || defaultTask?.location || fallbackTask?.location || '';
-                        const resolvedInfo = defaultTask?.notes || fallbackTask?.notes || info || '';
+                        const resolvedInfo = getTaskInfo(text, info);
                         const taskElement = TaskElement.create(text, targetCategory, resolvedLocation, resolvedInfo);
                         taskElement.dataset.originalText = text;
                         taskElement.dataset.lastKnownResetBoundary = lastKnownResetBoundary || '';
