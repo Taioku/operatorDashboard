@@ -36,7 +36,6 @@ const TASKS = [
     category: "daily",
     location: "Orbiter",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
-    note: "Get double base credit reward on your first mission.",
   },
   {
     id: "daily-first-win-bonus",
@@ -44,6 +43,7 @@ const TASKS = [
     category: "daily",
     location: "Orbiter",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
+    notes: "Get double base credit reward on your first mission.",
   },
   {
     id: "standing-faction-syndicates",
