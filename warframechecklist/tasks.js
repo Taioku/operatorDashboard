@@ -16,7 +16,7 @@
  *     weekday?: number,        // 0=Sunday..6=Saturday
  *     intervalHours?: number,  // for interval resets
  *   },
- *   notes?: string
+ *   notes?: string              // shown as additional info when hovering the task's "?"
  * }
  *
  * Notes on standard (0:00 UTC) daily reset and standard (Monday 0:00 UTC)
@@ -36,6 +36,7 @@ const TASKS = [
     category: "daily",
     location: "Orbiter",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
+    note: "Get double base credit reward on your first mission.",
   },
   {
     id: "daily-first-win-bonus",
