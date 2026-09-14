@@ -32,10 +32,11 @@ const TASKS = [
   // ============================================================
   {
     id: "daily-tribute",
-    name: "Daily Tribute (login reward)",
+    name: "Daily Tribute",
     category: "daily",
     location: "Orbiter",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
+    notes: "Collect the daily login reward.",
   },
   {
     id: "daily-first-win-bonus",
@@ -47,11 +48,11 @@ const TASKS = [
   },
   {
     id: "standing-faction-syndicates",
-    name: "Standing limit — Faction Syndicates (Steel Meridian, Arbiters of Hexis, Cephalon Suda, Perrin Sequence, Red Veil, New Loka)",
+    name: "Standing limit",
     category: "daily",
     location: "Relay",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
-    notes: "Get a bonus for winning your first mission of the day.",
+    notes: "Gain daily standing cap with your pledged Syndicate(s). (Steel Meridian, Arbiters of Hexis, Cephalon Suda, Perrin Sequence, Red Veil, New Loka)",
   },
   {
     id: "standing-ostron",
@@ -59,7 +60,6 @@ const TASKS = [
     category: "daily",
     location: "Cetus, Earth",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
-    notes: "Get a bonus for winning your first mission of the day.",
   },
   {
     id: "standing-quills",
@@ -67,7 +67,6 @@ const TASKS = [
     category: "daily",
     location: "Cetus, Earth",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
-    notes: "Get a bonus for winning your first mission of the day.",
   },
   {
     id: "standing-solaris-united",
