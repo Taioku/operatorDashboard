@@ -373,7 +373,10 @@
                     </div>
                 `;
 
-                taskItem.querySelector('.task-info').dataset.info = info || 'No additional information available.';
+                const infoButton = taskItem.querySelector('.task-info');
+                const infoText = info || 'No additional information available.';
+                infoButton.dataset.info = infoText;
+                infoButton.title = infoText;
 
                 taskItem.onclick = (event) => {
                     if (event.target.closest('.delete-btn, .eye-btn')) return;
@@ -386,8 +389,7 @@
                     TaskManager.toggleHidden(taskItem);
                 });
 
-                const infoBtn = taskItem.querySelector('.task-info');
-                infoBtn.addEventListener('click', (event) => event.stopPropagation());
+                infoButton.addEventListener('click', (event) => event.stopPropagation());
 
                 const deleteBtn = taskItem.querySelector('.delete-btn');
                 deleteBtn.addEventListener('click', (event) => TaskManager.deleteTask(event, deleteBtn));
@@ -635,10 +637,10 @@
                     const container = document.getElementById(`${category}Tasks`);
                     if (!container) return;
                     const currentTexts = Array.from(container.querySelectorAll('.task-text')).map((element) => element.textContent.trim());
-                    defaultTasks.forEach(({ text, location }) => {
+                    defaultTasks.forEach(({ text, location, info }) => {
                         const cleanText = TimerUtils.removeTimerFromText(text);
                         if (!currentTexts.includes(cleanText)) {
-                            container.appendChild(TaskElement.create(text, category, location));
+                            container.appendChild(TaskElement.create(text, category, location, info));
                         }
                     });
                 });
