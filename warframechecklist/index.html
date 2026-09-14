@@ -57,6 +57,12 @@
         .task-item.completed .task-timer-container{ display:none; }
         .task-item.hidden{ display:none; }
         .task-main{ display:flex; align-items:flex-start; gap:0.55rem; }
+        .task-info{ position:relative; width:15px; height:15px; flex-shrink:0; margin-top:0.18rem; border:1px solid var(--orokin-dim); border-radius:50%; background:transparent; color:var(--orokin); cursor:help; font-size:0.68rem; font-weight:700; line-height:13px; text-align:center; padding:0; }
+        .task-info:hover,
+        .task-info:focus-visible{ border-color:var(--orokin); outline:none; }
+        .task-info::after{ content:attr(data-info); position:absolute; left:calc(100% + 0.5rem); top:50%; z-index:10; display:none; width:min(260px, 70vw); padding:0.5rem 0.65rem; border:1px solid var(--line); background:var(--void); color:var(--ink); font-size:0.78rem; font-weight:400; line-height:1.4; text-align:left; white-space:normal; pointer-events:none; }
+        .task-info:hover::after,
+        .task-info:focus-visible::after{ display:block; }
         .checkbox{ width:14px; height:14px; border:1px solid var(--orokin-dim); flex-shrink:0; margin-top:0.28rem; position:relative; }
         .checkbox.checked{ border-color:var(--orokin); }
         .checkbox.checked::after{ content:''; position:absolute; inset:2px; background:var(--orokin); }
@@ -206,7 +212,8 @@
                 const section = task.category === 'daily' ? 'daily' : task.category === 'weekly' ? 'weekly' : 'other';
                 grouped[section].push({
                     text: taskToText(task),
-                    location: task.location || ''
+                    location: task.location || '',
+                    info: task.notes || ''
                 });
             });
             return grouped;
@@ -322,7 +329,7 @@
         }
 
         class TaskElement {
-            static create(rawText, category = 'other', location = '') {
+            static create(rawText, category = 'other', location = '', info = '') {
                 const timerConfig = TimerUtils.getTimerConfigForTask(rawText, category);
                 const cleanText = TimerUtils.removeTimerFromText(rawText);
                 const taskItem = document.createElement('div');
@@ -343,6 +350,7 @@
                     <div class="task-main">
                         <div class="checkbox"></div>
                         <div class="task-text">${cleanText}</div>
+                        <button class="task-info" type="button" aria-label="Show additional information">?</button>
                     </div>
                     ${location ? `
                         <div class="task-location">
@@ -365,6 +373,8 @@
                     </div>
                 `;
 
+                taskItem.querySelector('.task-info').dataset.info = info || 'No additional information available.';
+
                 taskItem.onclick = (event) => {
                     if (event.target.closest('.delete-btn, .eye-btn')) return;
                     TaskManager.toggleTask(taskItem);
@@ -375,6 +385,9 @@
                     event.stopPropagation();
                     TaskManager.toggleHidden(taskItem);
                 });
+
+                const infoBtn = taskItem.querySelector('.task-info');
+                infoBtn.addEventListener('click', (event) => event.stopPropagation());
 
                 const deleteBtn = taskItem.querySelector('.delete-btn');
                 deleteBtn.addEventListener('click', (event) => TaskManager.deleteTask(event, deleteBtn));
@@ -474,7 +487,8 @@
                         const defaultTask = DEFAULT_TASK_LOOKUP.get(text);
                         const fallbackTask = DEFAULT_TASK_BY_CLEAN_TEXT.get(cleanTaskText(text));
                         const resolvedLocation = location || defaultTask?.location || fallbackTask?.location || '';
-                        const taskElement = TaskElement.create(text, targetCategory, resolvedLocation);
+                        const resolvedInfo = defaultTask?.notes || fallbackTask?.notes || '';
+                        const taskElement = TaskElement.create(text, targetCategory, resolvedLocation, resolvedInfo);
                         taskElement.dataset.originalText = text;
                         taskElement.dataset.lastKnownResetBoundary = lastKnownResetBoundary || '';
                         taskElement.dataset.hidden = hidden ? '1' : '0';
@@ -511,8 +525,8 @@
                 Object.entries(DEFAULT_TASKS).forEach(([category, tasks]) => {
                     const container = document.getElementById(`${category}Tasks`);
                     if (!container) return;
-                    tasks.forEach(({ text, location }) => {
-                        container.appendChild(TaskElement.create(text, category, location));
+                    tasks.forEach(({ text, location, info }) => {
+                        container.appendChild(TaskElement.create(text, category, location, info));
                     });
                 });
             }
