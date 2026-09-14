@@ -51,6 +51,7 @@ const TASKS = [
     category: "daily",
     location: "Relay",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
+    notes: "Get a bonus for winning your first mission of the day.",
   },
   {
     id: "standing-ostron",
@@ -58,6 +59,7 @@ const TASKS = [
     category: "daily",
     location: "Cetus, Earth",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
+    notes: "Get a bonus for winning your first mission of the day.",
   },
   {
     id: "standing-quills",
@@ -65,6 +67,7 @@ const TASKS = [
     category: "daily",
     location: "Cetus, Earth",
     resetRule: { type: "daily", hourUTC: 0, minuteUTC: 0 },
+    notes: "Get a bonus for winning your first mission of the day.",
   },
   {
     id: "standing-solaris-united",
