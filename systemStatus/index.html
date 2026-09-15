@@ -498,6 +498,7 @@ body {
     font-size: 0.8rem;
 }
 .fissure-row .fissure-node { color: var(--color-text); font-weight: 600; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fissure-row .fissure-mode { display: inline-block; margin-left: 0.35rem; padding: 0.05rem 0.3rem; border: 1px solid rgba(245,158,11,0.35); border-radius: 999px; color: var(--warning-color); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.05em; vertical-align: 0.08em; }
 .fissure-row .fissure-type { font-size: 0.72rem; color: var(--color-text-muted); }
 .fissure-row .fissure-enemy { font-size: 0.68rem; color: var(--color-text-muted); white-space: nowrap; }
 
@@ -1175,7 +1176,7 @@ const displayFissures = (fissures) => {
             row.className = 'fissure-row';
             row.innerHTML = `
                 <div>
-                    <div class="fissure-node">${f.node || 'Unknown'}${f.isSharkwing||f.archwingRequired?' 🚁':''}</div>
+                    <div class="fissure-node">${f.node || 'Unknown'}${f.isSharkwing||f.archwingRequired?' 🚁':''}${f.isHard ? '<span class="fissure-mode">STEEL PATH</span>' : ''}</div>
                     <div class="fissure-type">${missionTypeFormat(f.missionType)}</div>
                 </div>
                 <div class="fissure-enemy">${f.enemy||''}</div>
