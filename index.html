@@ -45,6 +45,22 @@
     margin: 0;
   }
 
+  .title-link{
+    margin-left: 0.65rem;
+    font-family: 'Segoe UI', Inter, system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    text-decoration: none;
+    vertical-align: middle;
+  }
+
+  .title-link:hover,
+  .title-link:focus-visible{
+    color: var(--orokin);
+    outline: none;
+  }
+
   #dashboard{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -119,7 +135,7 @@
 <body>
   <main>
     <header>
-      <h1>Operator Dashboard</h1>
+      <h1>Operator Dashboard <a class="title-link" href="https://warframedle.com/">Warframe Dle</a></h1>
     </header>
 
     <div id="dashboard"></div>
