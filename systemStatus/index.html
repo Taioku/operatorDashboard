@@ -2295,6 +2295,7 @@ const displayWarframeData = async (platform) => {
 document.addEventListener('DOMContentLoaded', () => {
     const kp = document.getElementById('topbarKinepage');
     if (kp) kp.textContent = '';
+    let activePlatform = 'pc';
 
     /* ── Platform sync ───────────────────────────────── */
     const desktopSelect = document.getElementById('platformSelect');
@@ -2303,6 +2304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu    = document.getElementById('topbarMobileMenu');
 
     const onPlatformChange = (val) => {
+        activePlatform = val;
         desktopSelect.value = val;
         mobileSelect.value  = val;
         displayWarframeData(val);
@@ -2515,7 +2517,8 @@ document.addEventListener('DOMContentLoaded', () => {
     buildSwatches();
     applyTheme(currentTheme, currentMode);
 
-    displayWarframeData('pc');
+    displayWarframeData(activePlatform);
+    setInterval(() => displayWarframeData(activePlatform), 60000);
 });
     </script>
 </body>
