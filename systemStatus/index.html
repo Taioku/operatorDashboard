@@ -448,6 +448,7 @@ body {
 .cycle-vallis.state-warm .cycle-state { color: #f59e0b; }
 .cycle-cambion .cycle-icon       { background: linear-gradient(135deg,#dc2626,#991b1b); color:#f8fafc; }
 .cycle-cambion.state-vome .cycle-icon { background: linear-gradient(135deg,#7c3aed,#5b21b6); color:#f8fafc; }
+.cycle-cambion .cycle-icon img { filter: brightness(0) invert(1); }
 .cycle-cambion .cycle-state      { color: #dc2626; }
 .cycle-cambion.state-vome .cycle-state { color: #a78bfa; }
 .cycle-zariman .cycle-icon       { background: linear-gradient(135deg,#8b5cf6,#7c3aed); color:#f8fafc; }
@@ -1586,9 +1587,7 @@ const displaySteelPath = (d) => {
 ════════════════════════════════════════════════════════ */
 const displayArbitration = (d) => {
     if (!d) return null;
-    if (d.enemy?.toLowerCase() === 'tenno') {
-        return createCard('Arbitration', '<div class="arbitration-offline">Hexis drones are offline</div>');
-    }
+    if (d.expired || d.enemy?.toLowerCase() === 'tenno') return null;
     const content = document.createElement('div');
     const statusClass = d.active ? 'active' : 'inactive';
     content.innerHTML = `
@@ -2245,8 +2244,8 @@ const displayWarframeData = async (platform) => {
     if (data.globalUpgrades?.length)    add(colUrgent, displayGlobalUpgrades(data.globalUpgrades));
     if (data.sortie)      add(colUrgent, displaySortieInfo(data.sortie));
     if (data.archonHunt)  add(colUrgent, displayArchonHunt(data.archonHunt));
-    if (data.arbitration) add(colUrgent, displayArbitration(data.arbitration));
     if (data.steelPath)   add(colUrgent, displaySteelPath(data.steelPath));
+    if (data.arbitration) add(colUrgent, displayArbitration(data.arbitration));
     if (data.simaris)     add(colUrgent, displaySimaris(data.simaris));
     if (data.sentientOutposts) add(colUrgent, displaySentientOutposts(data.sentientOutposts));
     if (data.constructionProgress) add(colUrgent, displayConstructionProgress(data.constructionProgress));
