@@ -2240,8 +2240,6 @@ const displayWarframeData = async (platform) => {
     /* ══ COLUMN 1 — Urgent / time-sensitive ══════ */
     if (data.alerts?.length) {
         const c = displayAlerts(data.alerts); if (c) add(colUrgent, c);
-    } else {
-        add(colUrgent, createCard('Alerts', '<p class="peace-message">The Origin System is at peace</p>'));
     }
     if (data.persistentEnemies?.length) add(colUrgent, displayPersistentEnemies(data.persistentEnemies));
     if (data.globalUpgrades?.length)    add(colUrgent, displayGlobalUpgrades(data.globalUpgrades));
