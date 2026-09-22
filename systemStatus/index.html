@@ -1045,9 +1045,15 @@ const getRewardDisplay = (reward) => {
     if (!name && items.length) name = items.join(', ');
     if (!name && reward.credits) name = `${reward.credits.toLocaleString()} Credits`;
 
+    const rewardIcon = {
+        'forma blueprint': 'src/icons/Forma.png',
+        'detonite injector': 'src/icons/DetoniteInjector.png',
+        'mutagen mass': 'src/icons/MutagenMass.png',
+    }[name.toLowerCase().replace(/^\d+x\s*/, '')];
+
     return {
         name,
-        icon: reward.thumbnail || ''
+        icon: rewardIcon || reward.thumbnail || ''
     };
 };
 
